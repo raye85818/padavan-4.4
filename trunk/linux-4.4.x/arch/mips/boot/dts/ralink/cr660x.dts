@@ -61,16 +61,15 @@
 	status = "okay";
 };
 
-&nand {
+&spi0 {
 	status = "okay";
 
-	flash@0 {
+	m25p80@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "jedec,spi-nor";
 		reg = <0>;
-		nand-ecc-mode = "hw";
-		partitions {
-			compatible = "fixed-partitions";
-			#address-cells = <1>;
-			#size-cells = <1>;
+		spi-max-frequency = <10000000>;
 
 			partition@0 {
 				label = "Bootloader";
