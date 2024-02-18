@@ -63,60 +63,45 @@
 
 &spi0 {
 	status = "okay";
-
-	m25p80@0 {
+m25p80@0 {
 		#address-cells = <1>;
 		#size-cells = <1>;
 		compatible = "jedec,spi-nor";
 		reg = <0>;
 		spi-max-frequency = <10000000>;
 
-			partition@0 {
-				label = "Bootloader";
-				reg = <0x00000 0x80000>; /* 512k */
-			};
+		partition@0 {
+			label = "Bootloader";
+			reg = <0x00000 0x40000>;
+		};
 
-			partition@80000 {
-				label = "CFG_Bdata";
-				reg = <0x80000 0x80000>; /* 512k */
-			};
+		partition@40000 {
+			label = "Config";
+			reg = <0x40000 0x10000>;
+		};
 
-			partition@100000 {
-				label = "Factory";
-				reg = <0x100000 0x80000>; /* 512k */
-			};
+		partition@50000 {
+			label = "Factory";
+			reg = <0x50000 0x40000>;
+		};
 
-			partition@180000 {
-				label = "Crash";
-				reg = <0x180000 0x80000>; /* 512k */
-			};
+		partition@90000 {
+			label = "firmware";
+			reg = <0x90000 0xef0000>;
+		};
 
-			partition@200000 {
-				label = "firmware";
-				reg = <0x200000 0x1800000>; /* 24M */
-			};
+		partition@f80000 {
+			label = "Storage";
+			reg = <0xf80000 0x80000>;
+		};
 
-			partition@1a00000 {
-				label = "Config";
-				reg = <0x1a00000 0x80000>; /* 512K */
-			};
-
-			partition@1a80000 {
-				label = "Storage";
-				reg = <0x1a80000 0x400000>; /* 4096K */
-			};
-
-			partition@1e80000 {
-				label = "RWFS";
-				reg = <0x1e80000 0x6100000>;
-			};
-
-			partition@all {
-				label = "ALL";
-				reg = <0x0 0x7f80000>;
-			};
+		partition@all {
+			label = "ALL";
+			reg = <0x0 0x1000000>;
 		};
 	};
+};
+
 };
 
 &pcie {
