@@ -55,7 +55,7 @@
 &spi0 {
 	status = "okay";
 
-	m25p80@0 {
+	falsh@0 {
 		#address-cells = <1>;
 		#size-cells = <1>;
 		compatible = "jedec,spi-nor";
@@ -63,12 +63,12 @@
 		spi-max-frequency = <10000000>;
 
 		partition@0 {
-			label = "Bootloader";
+			label = "u-boot";
 			reg = <0x00000 0x40000>;
 		};
 
 		partition@40000 {
-			label = "Config";
+			label = "u-boot-env";
 			reg = <0x40000 0x10000>;
 		};
 
@@ -79,17 +79,17 @@
 
 		partition@90000 {
 			label = "firmware";
-			reg = <0x90000 0xef0000>;
+			reg = <0x90000 0x01b70000> ;
 		};
 
-		partition@f80000 {
-			label = "Storage";
-			reg = <0xf80000 0x80000>;
+		partition@0x01c00000 {
+			label = "ramfs";
+			reg = <0x01c00000 0x0038000>;
 		};
 
-		partition@all {
-			label = "ALL";
-			reg = <0x0 0x1000000>;
+		partition@0x01f80000 {
+			label = "noused";
+			reg = <0x01f80000 0x00080000 >;
 		};
 	};
 };
